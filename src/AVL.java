@@ -1,63 +1,34 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class AVL {
+import static java.lang.Math.max;
 
-    Node root;
+/**
+ * An AVL tree implementation with <code>int</code> keys.
+ *
+ * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
+ */
+public class AVL extends BinarySearchTreeRecursive {
 
-    int height(Node node) {
-        if (node == null) return 0;
-        return node.height;
+    @Override
+    Node insertNode(int key, Node node) {
+        node = super.insertNode(key, node);
+
+        updateHeight(node);
+
+        return rebalance(node);
     }
 
-    /**
-     * Utility method to get the maximum of two integers.
-     *
-     * @param a the first integer.
-     * @param b the second integer.
-     * @return the maximum of the two integers.
-     */
-    int max(int a, int b) {
-        return (a > b) ? a : b;
-    }
+    @Override
+    Node deleteNode(int key, Node node) {
+        node = super.deleteNode(key, node);
 
-    int getBalance(Node node) {
+        // Node is null if the tree doesn't contain the key
         if (node == null) {
-            return 0;
+            return null;
         }
-        int balance = node.left.height - node.right.height;
-        return balance;
-    }
 
-    /**
-     * Compares two date strings and returns true if the first date is earlier than
-     * the second date.
-     *
-     * @param a the first date string.`
-     * @param b the second date string.
-     * @return true if the first date is earlier than the second date, false
-     * otherwise.
-     * @throws ParseException if the input strings are not in the correct date
-     *                        format.
-     */
-    public boolean compare(String a, String b) throws ParseException {
+        updateHeight(node);
 
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date1 = dateFormat.parse(a);
-            Date date2 = dateFormat.parse(b);
-
-            if (date1.before(date2)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            // Handle the exception if the input strings are not in the correct format
-            return false;
-        }
+        return rebalance(node);
     }
 
     private void updateHeight(Node node) {
@@ -66,73 +37,76 @@ public class AVL {
         node.height = max(leftChildHeight, rightChildHeight) + 1;
     }
 
-    Node leftRotate(Node node) {
+    private Node rebalance(Node node) {
+        int balanceFactor = balanceFactor(node);
+
+        // Left-heavy?
+        if (balanceFactor < -1) {
+            if (balanceFactor(node.left) <= 0) {
+                // Rotate right
+                node = rotateRight(node);
+            } else {
+                // Rotate left-right
+                node.left = rotateLeft(node.left);
+                node = rotateRight(node);
+            }
+        }
+
+        // Right-heavy?
+        if (balanceFactor > 1) {
+            if (balanceFactor(node.right) >= 0) {
+                // Rotate left
+                node = rotateLeft(node);
+            } else {
+                // Rotate right-left
+                node.right = rotateRight(node.right);
+                node = rotateLeft(node);
+            }
+        }
+
+        return node;
+    }
+
+    private Node rotateRight(Node node) {
+        Node leftChild = node.left;
+
+        node.left = leftChild.right;
+        leftChild.right = node;
+
+        updateHeight(node);
+        updateHeight(leftChild);
+
+        return leftChild;
+    }
+
+    private Node rotateLeft(Node node) {
         Node rightChild = node.right;
-        Node T2 = rightChild.left;
+
+        node.right = rightChild.left;
         rightChild.left = node;
-        node.right = T2;
+
         updateHeight(node);
         updateHeight(rightChild);
 
         return rightChild;
     }
 
-    Node rightRotate(Node node) {
-        Node leftChild = node.left;
-        Node T2 = leftChild.right;
-        leftChild.right = node;
-        node.left = T2;
-        updateHeight(node);
-        updateHeight(leftChild);
-        return leftChild;
+    private int balanceFactor(Node node) {
+        return height(node.right) - height(node.left);
     }
 
-    protected Node insert(Node node, SaleRecord data) throws ParseException {
-
-        /* 1. Perform the normal BST insertion */
-        if (node == null) {
-            return (new Node(data));
-        }
-        // compare method not working right here, list of dates is not sorted (may have
-        // something to do with program8 class)
-
-        String nodeData = node.data.getDate();
-        String keyData = data.getDate();
-
-        if (compare(nodeData, keyData)) {
-            node.left = insert(node.left, data);
-        } else if (!compare(nodeData, keyData)) {
-            node.right = insert(node.right, data);
-        } else { // Duplicate keys not allowed
-            return node;
-        }
-        updateHeight(node);
-
-//        if (getBalance(node)) {
-
-        if (compare(data.getDate(), node.left.data.getDate())) {
-            return rightRotate(node);
-        } else if (compare(node.left.data.getDate(), data.getDate())) {
-            node.left = leftRotate(node.left);
-            return rightRotate(node);
-        }
-
-        if (compare(data.getDate(), node.right.data.getDate())) {
-            return leftRotate(node);
-        } else if (compare(node.right.data.getDate(), data.getDate())) {
-            node.right = rightRotate(node.right);
-            return leftRotate(node);
-        }
-//        }
-        return node;
+    private int height(Node node) {
+        return node != null ? node.height : -1;
     }
 
-    void preOrder(Node node) {
-        if (node != null) {
-            System.out.println(node.data.toString() + " ");
-            preOrder(node.left);
-            preOrder(node);
-        }
+    @Override
+    protected void appendNodeToString(Node node, StringBuilder builder) {
+        builder
+                .append(node.data)
+                .append("[H=")
+                .append(height(node))
+                .append(", BF=")
+                .append(balanceFactor(node))
+                .append(']');
     }
-
 }
