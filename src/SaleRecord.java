@@ -55,9 +55,14 @@ public class SaleRecord {
     }
     
     
+    // @Override
+    // public String toString() {
+    //     return salesPerson + ", " + customerName + ", " + carMake + ", " + carModel+ ", " +carYear+ ", " +salePrice+ ", " +comissionRate+ ", " +comissionEarned ;
+    // }
+
     @Override
-    public String toString() {
-        return salesPerson + ", " + customerName + ", " + carMake + ", " + carModel+ ", " +carYear+ ", " +salePrice+ ", " +comissionRate+ ", " +comissionEarned ;
+    public String toString(){
+        return "Date: " + date + " Model: " + carModel;
     }
 
 

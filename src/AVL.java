@@ -7,8 +7,7 @@ public class AVL {
     Node root;
 
     int height(Node node) {
-        if (node == null)
-            return 0;
+        if (node == null) return 0;
         return node.height;
     }
 
@@ -35,10 +34,10 @@ public class AVL {
      * Compares two date strings and returns true if the first date is earlier than
      * the second date.
      *
-     * @param a  the first date string.`
-     * @param db the second date string.
+     * @param a the first date string.`
+     * @param b the second date string.
      * @return true if the first date is earlier than the second date, false
-     *         otherwise.
+     * otherwise.
      * @throws ParseException if the input strings are not in the correct date
      *                        format.
      */
@@ -108,7 +107,32 @@ public class AVL {
             return node;
         }
         updateHeight(node);
-        return node;
 
+//        if (getBalance(node)) {
+
+        if (compare(data.getDate(), node.left.data.getDate())) {
+            return rightRotate(node);
+        } else if (compare(node.left.data.getDate(), data.getDate())) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+
+        if (compare(data.getDate(), node.right.data.getDate())) {
+            return leftRotate(node);
+        } else if (compare(node.right.data.getDate(), data.getDate())) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
+//        }
+        return node;
     }
+
+    void preOrder(Node node) {
+        if (node != null) {
+            System.out.println(node.data.toString() + " ");
+            preOrder(node.left);
+            preOrder(node);
+        }
+    }
+
 }
