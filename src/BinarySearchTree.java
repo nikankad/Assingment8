@@ -11,9 +11,11 @@ public interface BinarySearchTree extends BinaryTree {
      * Searches for a node with the given search key.
      *
      * @param key the search key
-     * @return the node or <code>null</code> if no node with the given search key exists
+     * @return the node or <code>null</code> if no node with the given search key
+     *         exists
+     * @throws ParseException
      */
-//    Node searchNode(int key);
+    int searchNode(String carMake, String carDate) throws ParseException;
 
     /**
      * Inserts a node with the given key.
@@ -22,11 +24,10 @@ public interface BinarySearchTree extends BinaryTree {
      */
     void insertNode(SaleRecord key) throws ParseException;
 
-
     /**
      * Deletes the node with the given key.
      *
      * @param key the key of the node to be deleted
      */
-//    void deleteNode(int key);
+    // void deleteNode(int key);
 }
