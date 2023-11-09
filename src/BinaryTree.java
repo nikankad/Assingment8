@@ -1,4 +1,14 @@
+/**
+ * Interface for various binary tree implementations.
+ *
+ * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
+ */
 
+/**
+ * Interface for various binary tree implementations.
+ *
+ * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
+ */
 public interface BinaryTree {
 
     /**

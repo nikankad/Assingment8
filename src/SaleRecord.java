@@ -1,18 +1,20 @@
-public class SaleRecord {
-	private final String date;
-	private final String salesPerson;
-	private final String customerName;
-	private final String carMake;
-	private final String carModel;
+import java.util.Date;
 
-	private final int carYear;
-    private final double salePrice;
-    private final double comissionRate;
-    private final double comissionEarned;
-	
-    
-    public SaleRecord(String date, String salePerson, String customerName, String carMake, String carModel, int carYear, double salePrice, double comissionRate, double comissionEarned){
-    	this.date = date;
+public class SaleRecord {
+    private String date;
+    private String salesPerson;
+    private String customerName;
+    private String carMake;
+    private String carModel;
+
+    private int carYear;
+    private double salePrice;
+    private double comissionRate;
+    private double comissionEarned;
+
+    public SaleRecord(String date, String salePerson, String customerName, String carMake, String carModel, int carYear,
+                      double salePrice, double comissionRate, double comissionEarned) {
+        this.date = date;
         this.salesPerson = salePerson;
         this.customerName = customerName;
         this.carMake = carMake;
@@ -21,9 +23,22 @@ public class SaleRecord {
         this.salePrice = salePrice;
         this.comissionRate = comissionRate;
         this.comissionEarned = comissionEarned;
-	
-    
+
     }
+
+
+    public SaleRecord(Date date2, String salesperson2, String customerName2, String carMake2, String carModel2,
+                      int carYear2, double salePrice2, double commissionRate) {
+    }
+
+
+    /**
+     * @return String
+     */
+    public String getSalePerson() {
+        return salesPerson;
+    }
+
     public double getSalePrice() {
         return salePrice;
     }
@@ -31,40 +46,31 @@ public class SaleRecord {
     public String getDate() {
         return date;
     }
-    
+
     public int carYear() {
-    	return carYear;
+        return carYear;
     }
-    
-    
-    
+
     public double getCommissionRate() {
-    	return comissionRate;
+        return comissionRate;
     }
-    
+
     public String getModel() {
-    	return carModel;
+        return carModel;
     }
-    
+
     public String getMake() {
-    	return carMake;
+        return carMake;
     }
-    
+
     public String getCustomerName() {
-    	return customerName;
+        return customerName;
     }
-    
-    
-    // @Override
-    // public String toString() {
-    //     return salesPerson + ", " + customerName + ", " + carMake + ", " + carModel+ ", " +carYear+ ", " +salePrice+ ", " +comissionRate+ ", " +comissionEarned ;
-    // }
 
     @Override
-    public String toString(){
-        return "Date: " + date + " Model: " + carModel;
+    public String toString() {
+        return salesPerson + ", " + customerName + ", " + carMake + ", " + carModel + ", " + carYear + ", " + salePrice
+                + ", " + comissionRate + ", " + comissionEarned;
     }
-
-
 
 }

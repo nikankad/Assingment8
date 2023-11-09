@@ -1,15 +1,9 @@
+import java.text.ParseException;
 
-import static java.lang.Math.max;
-
-/**
- * An AVL tree implementation with <code>int</code> keys.
- *
- * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
- */
 public class AVL extends BinarySearchTreeRecursive {
 
     @Override
-    Node insertNode(int key, Node node) {
+    Node insertNode(SaleRecord key, Node node) throws ParseException {
         node = super.insertNode(key, node);
 
         updateHeight(node);
@@ -17,24 +11,40 @@ public class AVL extends BinarySearchTreeRecursive {
         return rebalance(node);
     }
 
-    @Override
-    Node deleteNode(int key, Node node) {
-        node = super.deleteNode(key, node);
-
-        // Node is null if the tree doesn't contain the key
-        if (node == null) {
-            return null;
-        }
-
-        updateHeight(node);
-
-        return rebalance(node);
-    }
+//    @Override
+//    Node deleteNode(SaleRecord key, Node node) {
+//        node = super.deleteNode(key, node);
+//
+//        // Node is null if the tree doesn't contain the key
+//        if (node == null) {
+//            return null;
+//        }
+//
+//        updateHeight(node);
+//
+//        return rebalance(node);
+//    }
 
     private void updateHeight(Node node) {
         int leftChildHeight = height(node.left);
         int rightChildHeight = height(node.right);
-        node.height = max(leftChildHeight, rightChildHeight) + 1;
+        node.height = Math.max(leftChildHeight, rightChildHeight) + 1;
+    }
+
+
+    /**
+     * Performs preorder traversal of the AVL tree and prints the nodes.
+     *
+     * @param node the root node of the subtree to be traversed.
+     */
+    void preOrder(Node node) {
+        if (node != null) {
+
+            System.out.println(node.data.getDate() + " ");
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+
     }
 
     private Node rebalance(Node node) {

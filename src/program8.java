@@ -1,39 +1,23 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.TreeMap;
 
 public class program8 {
     public static void main(String[] args) throws ParseException {
 
-        String csvFile = "src/small_sample.csv"; // Path to your CSV file
-        String line;
-
-        // TreeMap to store Car Make as key and its corresponding AVL tree as value
-
         AVL tree = new AVL();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            br.readLine(); // Skip the header row
+        SaleRecord saleRecord1 = new SaleRecord("2023-11-01", "John Doe", "Alice Johnson", "Toyota", "Camry", 2022, 25000.0, 0.1, 2500.0);
+        SaleRecord saleRecord2 = new SaleRecord("2023-11-02", "Jane Smith", "Bob Brown", "Ford", "Mustang", 2023, 30000.0, 0.08, 2400.0);
+        SaleRecord saleRecord3 = new SaleRecord("2023-11-03", "David Clark", "Eva Wilson", "Honda", "Civic", 2021, 20000.0, 0.12, 2400.0);
+        SaleRecord saleRecord4 = new SaleRecord("2023-11-04", "Linda Lee", "Michael Turner", "Chevrolet", "Malibu", 2020, 18000.0, 0.15, 2700.0);
+        SaleRecord saleRecord5 = new SaleRecord("2023-11-05", "Richard Johnson", "Sarah Adams", "Nissan", "Altima", 2019, 16000.0, 0.14, 2240.0);
 
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                // Assuming the order of columns in the CSV matches the constructor parameters
-                final SaleRecord saleRecord = new SaleRecord(data[0], data[1], data[2], data[3],
-                        data[4], Integer.parseInt(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]),
-                        Double.parseDouble(data[8]));
+        SaleRecord[] arr = {saleRecord1, saleRecord2, saleRecord3, saleRecord4, saleRecord5};
 
-                String carMake = saleRecord.getMake();
 
-                // Insert the SaleRecord into the corresponding AVL tree based on Car Make
-                tree.root = tree.insert(tree.root, saleRecord);
-            }
-
-            tree.preOrder(tree.root);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (SaleRecord saleRecord : arr) {
+            tree.root = tree.insertNode(saleRecord, tree.root);
         }
+
+        tree.preOrder(tree.root);
     }
 }
