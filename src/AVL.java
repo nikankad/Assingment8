@@ -11,26 +11,11 @@ public class AVL extends BinarySearchTreeRecursive {
         return rebalance(node);
     }
 
-//    @Override
-//    Node deleteNode(SaleRecord key, Node node) {
-//        node = super.deleteNode(key, node);
-//
-//        // Node is null if the tree doesn't contain the key
-//        if (node == null) {
-//            return null;
-//        }
-//
-//        updateHeight(node);
-//
-//        return rebalance(node);
-//    }
-
     private void updateHeight(Node node) {
         int leftChildHeight = height(node.left);
         int rightChildHeight = height(node.right);
         node.height = Math.max(leftChildHeight, rightChildHeight) + 1;
     }
-
 
     /**
      * Performs preorder traversal of the AVL tree and prints the nodes.

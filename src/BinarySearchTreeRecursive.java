@@ -16,20 +16,21 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
 
     public int searchNode(Node node, String carMake, String carDate) throws ParseException {
 
-        int count = 0;
-        if (node == null) {
-            return count;
-        } else if (node.data.getDate().equals(carDate) || carMake.equals(node.data.getMake())) {
-            count++;
+        // int count = 0;
+        // if (node == null) {
+        // return count;
+        // } else if (node.data.getDate().equals(carDate) ||
+        // carMake.equals(node.data.getMake())) {
+        // count++;
 
-        } else if (compare(carDate, node.data.getDate())) {
-            return searchNode(node.left, carMake, carDate);
-        } else
+        // } else if (compare(carDate, node.data.getDate())) {
+        // return searchNode(node.left, carMake, carDate);
+        // } else
 
-        {
-            return searchNode(node.right, carMake, carDate);
-        }
-        return count;
+        // {
+        // return searchNode(node.right, carMake, carDate);
+        // }
+        return 0;
     }
 
     public boolean compare(String a, String b) throws ParseException {
