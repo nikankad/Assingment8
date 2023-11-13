@@ -12,6 +12,7 @@ public class SaleRecord {
     private double comissionRate;
     private double comissionEarned;
 
+
     public SaleRecord(String date, String salePerson, String customerName, String carMake, String carModel, int carYear,
                       double salePrice, double comissionRate, double comissionEarned) {
         this.date = date;

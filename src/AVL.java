@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class AVL extends BinarySearchTreeRecursive {
@@ -11,7 +13,8 @@ public class AVL extends BinarySearchTreeRecursive {
         return rebalance(node);
     }
 
-    private void updateHeight(Node node) {
+
+    private void updateHeight(@NotNull Node node) {
         int leftChildHeight = height(node.left);
         int rightChildHeight = height(node.right);
         node.height = Math.max(leftChildHeight, rightChildHeight) + 1;
@@ -74,7 +77,7 @@ public class AVL extends BinarySearchTreeRecursive {
         return leftChild;
     }
 
-    private Node rotateLeft(Node node) {
+    private @NotNull Node rotateLeft(Node node) {
         Node rightChild = node.right;
 
         node.right = rightChild.left;
@@ -104,4 +107,6 @@ public class AVL extends BinarySearchTreeRecursive {
                 .append(balanceFactor(node))
                 .append(']');
     }
+
+
 }

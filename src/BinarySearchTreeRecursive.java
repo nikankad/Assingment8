@@ -9,29 +9,18 @@ import java.util.Date;
  */
 public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinarySearchTree {
 
-    // @Override
-    public int searchNode(String carMake, String carDate) {
-        return searchNode(carMake, carDate);
-    }
 
-    public int searchNode(Node node, String carMake, String carDate) throws ParseException {
-
-        // int count = 0;
-        // if (node == null) {
-        // return count;
-        // } else if (node.data.getDate().equals(carDate) ||
-        // carMake.equals(node.data.getMake())) {
-        // count++;
-
-        // } else if (compare(carDate, node.data.getDate())) {
-        // return searchNode(node.left, carMake, carDate);
-        // } else
-
-        // {
-        // return searchNode(node.right, carMake, carDate);
-        // }
-        return 0;
-    }
+//    public int searchSaleRecords(String carMake, String date) {
+//        int count = 0;
+//
+//        for (SaleRecord saleRecord : saleRecords) {
+//            if (saleRecord.getMake().equalsIgnoreCase(carMake) && saleRecord.getDate().equalsIgnoreCase(date)) {
+//                count++;
+//            }
+//        }
+//
+//        return count;
+//    }
 
     public boolean compare(String a, String b) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -127,4 +116,25 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
     // }
     // return node;
     // }
+
+    public int search(String carMake, String date) {
+        return search(root, carMake, date);
+    }
+
+    private int search(Node node, String carMake, String date) {
+        if (node == null) {
+            return 0;
+        }
+
+        SaleRecord target = node.data;
+        int compareResult = target.compareTo(node.data);
+
+        if (compareResult == 0) {
+            return 1 + search(node.left, carMake, date) + search(node.right, carMake, date);
+        } else if (compareResult < 0) {
+            return search(node.left, carMake, date);
+        } else {
+            return search(node.right, carMake, date);
+        }
+    }
 }

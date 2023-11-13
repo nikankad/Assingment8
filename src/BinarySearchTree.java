@@ -7,15 +7,6 @@ import java.text.ParseException;
  */
 public interface BinarySearchTree extends BinaryTree {
 
-    /**
-     * Searches for a node with the given search key.
-     *
-     * @param key the search key
-     * @return the node or <code>null</code> if no node with the given search key
-     *         exists
-     * @throws ParseException
-     */
-    int searchNode(String carMake, String carDate) throws ParseException;
 
     /**
      * Inserts a node with the given key.
