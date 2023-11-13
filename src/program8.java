@@ -2,46 +2,60 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
-public class Program8 {
-    public static void main(String[] args) {
+public class program8 {
+    public static void main(String[] args) throws ParseException {
+
         AVL tree = new AVL();
+
+
+        ArrayList<String> searchLines = new ArrayList<>();
+
 
         String csvFileA = "src/small_sample.csv"; // Path to your CSV file
         String csvFileB = "src/test.csv"; // Path to your CSV file
 
-        try (BufferedReader brA = new BufferedReader(new FileReader(csvFileA));
-             BufferedReader brB = new BufferedReader(new FileReader(csvFileB))) {
+        String line;
 
-            brA.readLine(); // Skip the header row in csvFileA
-            brB.readLine(); // Skip the header row in csvFileB
 
-            String lineA, lineB;
+        // read the test.csv entries (read it and automatically put it in the new csv file
 
-            while ((lineA = brA.readLine()) != null) {
-                String[] data = lineA.split(",");
-                SaleRecord saleRecord = new SaleRecord(data[0], data[1], data[2], data[3], data[4],
-                        Integer.parseInt(data[5]), Double.parseDouble(data[6]),
-                        Double.parseDouble(data[7]), Double.parseDouble(data[8]));
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFileB))) {
+            br.readLine(); // Skip the header row
 
-                // Insert the SaleRecord into the corresponding AVL tree based on Car Make
-                tree.root = tree.insertNode(saleRecord, tree.root);
-            }
-
-            while ((lineB = brB.readLine()) != null) {
-                String[] searchData = lineB.split(",");
-                String carMake = searchData[0].trim();
-                String date = searchData[1].trim();
-
-                // Search for the SaleRecord directly in the AVL tree
-                int numberOfSales = tree.search(carMake, date);
-
-                System.out.println("Car Make: " + carMake + ", Date: " + date + ", Number of Sales: " + numberOfSales);
+            while ((line = br.readLine()) != null) {
+                // Assuming the order of columns in the CSV matches the constructor
+                searchLines.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
+
+        String checkData = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFileA))) {
+            br.readLine(); // Skip the header row
+
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                checkData = data[3] + "," + data[0];
+                // Assuming the order of columns in the CSV matches the constructor
+                final SaleRecord saleRecord = new SaleRecord(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]), Double.parseDouble(data[6]), Double.parseDouble(data[7]), Double.parseDouble(data[8]));
+
+                // Insert the SaleRecord into the corresponding AVL tree based on Car Make
+                tree.root = tree.insertNode(saleRecord, tree.root);
+                tree.search(tree.root, );
+
+
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println(checkData);
+
+
     }
 }

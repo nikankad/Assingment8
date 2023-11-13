@@ -121,20 +121,31 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
         return search(root, carMake, date);
     }
 
-    private int search(Node node, String carMake, String date) {
+    public int search(Node node, String carMake, String date) {
         if (node == null) {
             return 0;
         }
 
-        SaleRecord target = node.data;
-        int compareResult = target.compareTo(node.data);
+        String checkData = carMake + "," + date;
 
-        if (compareResult == 0) {
-            return 1 + search(node.left, carMake, date) + search(node.right, carMake, date);
-        } else if (compareResult < 0) {
-            return search(node.left, carMake, date);
-        } else {
-            return search(node.right, carMake, date);
-        }
+        String saleRecordData = node.data.getMake() + "," + node.data.getDate();
+
+        System.out.println(checkData + " ___ " + checkData);
+
+        SaleRecord target = node.data;
+//        int compareResult = target.compareTo(node.data);
+
+//        boolean compareResults = target.
+//
+//
+//        if (compareResult == 0) {
+//            return 1 + search(node.left, carMake, date) + search(node.right, carMake, date);
+//        } else if (compareResult < 0) {
+//            return search(node.left, carMake, date);
+//        } else {
+//            return search(node.right, carMake, date);
+//        }
+
+        return 0;
     }
 }
