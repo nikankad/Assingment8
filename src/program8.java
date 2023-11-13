@@ -44,16 +44,14 @@ public class program8 {
 
                 // Insert the SaleRecord into the corresponding AVL tree based on Car Make
                 tree.root = tree.insertNode(saleRecord, tree.root);
-                tree.search(tree.root, );
-
-
-
 
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+//        tree.preOrder(tree.root);
 //        System.out.println(checkData);
 
 

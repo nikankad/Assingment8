@@ -8,6 +8,10 @@ import java.text.ParseException;
 public interface BinarySearchTree extends BinaryTree {
 
 
+//    Node searchNode(Node node, String carMake, String Date);
+
+    Node searchNode(int key);
+
     /**
      * Inserts a node with the given key.
      *

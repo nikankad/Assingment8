@@ -12,6 +12,7 @@ public class Node {
     Node left;
     Node right;
 
+    int count;
     int height; // used in AVL tree
 
     /**
@@ -21,6 +22,7 @@ public class Node {
      */
     public Node(SaleRecord data) {
         this.data = data;
+        this.count = 1;
     }
 
     public SaleRecord getData() {

@@ -10,17 +10,14 @@ import java.util.Date;
 public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinarySearchTree {
 
 
-//    public int searchSaleRecords(String carMake, String date) {
-//        int count = 0;
-//
-//        for (SaleRecord saleRecord : saleRecords) {
-//            if (saleRecord.getMake().equalsIgnoreCase(carMake) && saleRecord.getDate().equalsIgnoreCase(date)) {
-//                count++;
-//            }
-//        }
-//
-//        return count;
-//    }
+    @Override
+    public Node searchNode(int key) {
+        return searchNode(key, root);
+    }
+
+    private Node searchNode(int key, Node node) {
+        return null;
+    }
 
     public boolean compare(String a, String b) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -31,6 +28,25 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
 
     }
 
+//    @Override
+//    public Node searchNode(Node node, String carMake, String carDate) {
+//        return searchNode(carMake, carDate);
+//    }
+//
+//    private Node searchNode(int key, Node node) {
+//        if (node == null) {
+//            return null;
+//        }
+//
+//        if (key == node.data) {
+//            return node;
+//        } else if (key < node.data) {
+//            return searchNode(key, node.left);
+//        } else {
+//            return searchNode(key, node.right);
+//        }
+//    }
+
     @Override
     public void insertNode(SaleRecord key) throws ParseException {
         root = insertNode(key, root);
@@ -38,13 +54,31 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
 
     Node insertNode(SaleRecord key, Node node) throws ParseException {
         // No node at current position --> store new node at current position
+
+        String check1 = null;
+        String check2 = null;
+        if (node != null) {
+
+            check1 = node.data.getDate() + "," + node.data.getMake();
+            check2 = key.getDate() + "," + key.getMake();
+        }
+
+        System.out.println(check1);
+
         if (node == null) {
             node = new Node(key);
+            node.count++;
+            System.out.println(node.count);
         }
+
+//        String checking = key.getDate() + key.getMake()
 
         // Otherwise, traverse the tree to the left or right depending on the key
         else if (compare(key.getDate(), node.data.getDate())) {
             node.left = insertNode(key, node.left);
+            if (check1.equals(check2)) {
+                System.out.println("PLO");
+            }
         } else if (!compare(key.getDate(), node.data.getDate())) {
             node.right = insertNode(key, node.right);
         } else {
@@ -147,5 +181,10 @@ public class BinarySearchTreeRecursive extends BaseBinaryTree implements BinaryS
 //        }
 
         return 0;
+    }
+
+    @Override
+    public Node searchNode(String carMake, String carDate) {
+        return null;
     }
 }

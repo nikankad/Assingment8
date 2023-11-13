@@ -3,7 +3,7 @@
  *
  * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
  */
-public class BaseBinaryTree implements BinaryTree {
+public abstract class BaseBinaryTree implements BinaryTree {
 
     protected Node root;
 
@@ -36,4 +36,6 @@ public class BaseBinaryTree implements BinaryTree {
     protected void appendNodeToString(Node node, StringBuilder builder) {
         builder.append(node.data);
     }
+
+    public abstract Node searchNode(String carMake, String carDate);
 }
