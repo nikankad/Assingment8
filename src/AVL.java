@@ -1,20 +1,9 @@
-import org.jetbrains.annotations.NotNull;
 
-import java.text.ParseException;
 
 public class AVL extends BinarySearchTreeRecursive {
 
-    @Override
-    Node insertNode(SaleRecord key, Node node) throws ParseException {
-        node = super.insertNode(key, node);
 
-        updateHeight(node);
-
-        return rebalance(node);
-    }
-
-
-    private void updateHeight(@NotNull Node node) {
+    private void updateHeight(Node node) {
         int leftChildHeight = height(node.left);
         int rightChildHeight = height(node.right);
         node.height = Math.max(leftChildHeight, rightChildHeight) + 1;
@@ -28,7 +17,7 @@ public class AVL extends BinarySearchTreeRecursive {
     void preOrder(Node node) {
         if (node != null) {
 
-            System.out.println(node.data.getDate() + " ");
+            System.out.println(node.count + "  " + node.data.getDate() + " ");
             preOrder(node.left);
             preOrder(node.right);
         }
@@ -77,7 +66,7 @@ public class AVL extends BinarySearchTreeRecursive {
         return leftChild;
     }
 
-    private @NotNull Node rotateLeft(Node node) {
+    private Node rotateLeft(Node node) {
         Node rightChild = node.right;
 
         node.right = rightChild.left;

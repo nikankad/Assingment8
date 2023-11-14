@@ -1,8 +1,3 @@
-/**
- * Abstract binary tree implementation containing only the root node.
- *
- * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
- */
 public abstract class BaseBinaryTree implements BinaryTree {
 
     protected Node root;
@@ -37,5 +32,4 @@ public abstract class BaseBinaryTree implements BinaryTree {
         builder.append(node.data);
     }
 
-    public abstract Node searchNode(String carMake, String carDate);
 }

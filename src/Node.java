@@ -1,8 +1,3 @@
-/**
- * A node in a binary tree, containing an <code>int</code> data.
- *
- * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
- */
 public class Node {
 
     // also called "value" in a binary tree
@@ -28,4 +23,6 @@ public class Node {
     public SaleRecord getData() {
         return data;
     }
+
+
 }

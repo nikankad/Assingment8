@@ -74,4 +74,7 @@ public class SaleRecord {
                 + ", " + comissionRate + ", " + comissionEarned;
     }
 
+    public double getCommissionEarned() {
+        return comissionEarned;
+    }
 }

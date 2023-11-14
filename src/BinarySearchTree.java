@@ -1,28 +1,20 @@
 import java.text.ParseException;
 
-/**
- * Interface for various BST implementations.
- *
- * @author <a href="sven@happycoders.eu">Sven Woltmann</a>
- */
 public interface BinarySearchTree extends BinaryTree {
 
 
-//    Node searchNode(Node node, String carMake, String Date);
+    int searchNode(String carDate, String carMake);
 
-    Node searchNode(int key);
+
+//    void insertNode(SaleRecord key) throws ParseException;
+
+    void insertNode(SaleRecord key) throws ParseException;
 
     /**
      * Inserts a node with the given key.
      *
      * @param key the key of the node to be inserted
      */
-    void insertNode(SaleRecord key) throws ParseException;
-
-    /**
-     * Deletes the node with the given key.
-     *
-     * @param key the key of the node to be deleted
-     */
-    // void deleteNode(int key);
+    Node insertNode(SaleRecord key, Node node) throws ParseException;
 }
+
